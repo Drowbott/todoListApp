@@ -1,32 +1,23 @@
-import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
-import ToDoList from '../components/ToDoList';
-import ToDoForm from '../components/ToDoForm';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from 'react-native';
 
-const App = () => {
-  const [tasks, setTasks] = useState([]);
+import HomeScreen from './screens/HomeScreen';
+import AboutScreen from './screens/AboutScreen';
+import MainLayout from './layouts/MainLayout';
 
-  const addTask = (task) => {
-    if (task && task.trim() !== '') {
-      setTasks([...tasks, task]);
-    }
-  };
+const Stack = createStackNavigator();
 
+function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#A7D1AB" />
-      <ToDoList tasks={tasks} />
-      <ToDoForm addTask={addTask} />
-    </SafeAreaView>
+    <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="About" component={AboutScreen} />
+            </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#A7D1AB',
-    padding: 20,
-  },
-});
+}
 
 export default App;
